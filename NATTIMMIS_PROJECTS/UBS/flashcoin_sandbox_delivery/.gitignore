@@ -1,0 +1,88 @@
+# =============================================================================
+#  Source-control hygiene — secrets and runtime artefacts must NEVER be tracked
+# =============================================================================
+
+# Secrets and keys (any pattern that smells like a credential)
+*.env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.kdbx
+keystore/
+secrets/
+credentials*.json
+service-account*.json
+
+# Operational config containing keys / endpoints / signer URIs
+services/**/config.json
+services/**/wallets.json
+services/**/*.local.json
+config.json
+wallets.json
+
+# Build / compile artefacts
+build/
+out/
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Tronbox / Truffle / Hardhat
+build/contracts/
+networks.js
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json.bak
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Indexer / reconciliation runtime state
+*.sqlite
+*.sqlite3
+*.db
+indexer.db
+reconciliation.db
+
+# Simulator runtime
+services/stress/wallets.json
+services/stress/config.json
+services/stress/simulation.log
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Coverage / static analysis output
+coverage/
+slither.json
+slither-report.md
+mythril-report.md
+
+# Local override for any sensitive doc
+docs/**/*.local.md

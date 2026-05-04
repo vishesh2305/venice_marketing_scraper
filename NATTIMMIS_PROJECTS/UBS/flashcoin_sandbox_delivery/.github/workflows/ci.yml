@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  compile-and-test:
+    name: Compile + Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Hardhat compile
+        run: npx hardhat compile
+      - name: Hardhat test
+        run: npx hardhat test
+      - name: Coverage
+        run: npx hardhat coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+
+  solhint:
+    name: solhint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx solhint 'contracts/**/*.sol'
+
+  python-lint:
+    name: Python lint + import check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps (indexer + reconciler + key mgmt)
+        run: |
+          pip install ruff
+          pip install -r services/keymanagement/requirements.txt || true
+          pip install -r services/indexer/requirements.txt || true
+          pip install -r services/reconciliation/requirements.txt || true
+      - name: ruff
+        run: ruff check services/

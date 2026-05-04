@@ -1,0 +1,4 @@
+tronpy>=0.4.0
+boto3>=1.34.0       # AWS KMS adapter
+hvac>=2.1.0         # HashiCorp Vault adapter
+python-dotenv>=1.0.0

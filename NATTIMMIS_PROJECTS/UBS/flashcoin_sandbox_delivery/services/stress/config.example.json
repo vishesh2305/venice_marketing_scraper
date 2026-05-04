@@ -1,0 +1,26 @@
+{
+  "_comment": "TEST/SANDBOX ONLY. Copy to config.json and fill in. Never commit config.json.",
+
+  "network": "shasta",
+  "full_node": "https://api.shasta.trongrid.io",
+  "solidity_node": "https://api.shasta.trongrid.io",
+  "event_server": "https://api.shasta.trongrid.io",
+  "api_key": "",
+
+  "contract_address": "TREPLACE_WITH_DEPLOYED_CONTRACT_ADDRESS",
+  "funder_private_key": "REPLACE_WITH_TESTNET_ONLY_PRIVATE_KEY_HEX_NO_0x",
+
+  "number_of_wallets": 50,
+  "transactions_per_second": 5,
+  "tranche_amount": 1000,
+  "delay_between_calls": 0.2,
+  "burst_count": 1000,
+  "loop_hops": 3,
+  "fund_trx_per_wallet": 50,
+  "max_workers": 16,
+
+  "wallets_file": "wallets.json",
+  "log_file": "simulation.log",
+
+  "allow_mainnet": false
+}

@@ -1,0 +1,27 @@
+# gitleaks configuration — block secrets from being committed.
+# Run on every PR (.github/workflows/security.yml) and locally via `make audit`.
+
+title = "Internal Settlement Token — secret scan rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id    = "tron-private-key-hex"
+description = "TRON private key (64 hex chars, no 0x)"
+regex = '''(?i)(?:private[_-]?key|pk|funder[_-]?private[_-]?key)["'\s:=]+["']?[a-f0-9]{64}["']?'''
+tags  = ["key", "tron"]
+
+[[rules]]
+id    = "trongrid-api-key"
+description = "TronGrid API key"
+regex = '''TRON-PRO-API-KEY[\s:=]+["']?[A-Za-z0-9-]{30,}["']?'''
+tags  = ["api-key", "tron"]
+
+[allowlist]
+description = "Test fixtures and documentation samples"
+paths = [
+  '''test/.*''',
+  '''docs/.*\.md''',
+  '''.*\.example\..*''',
+]

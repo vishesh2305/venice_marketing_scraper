@@ -1,0 +1,35 @@
+# =============================================================================
+#  CODEOWNERS — required reviewers for sensitive paths.
+#
+#  Branch protection on `main` should require:
+#    * 2 approvals from CODEOWNERS for any file under contracts/, migrations/,
+#      services/keymanagement/, scripts/, or .github/.
+#    * Status checks: ci.yml, security.yml.
+#    * Signed commits.
+#
+#  See docs/governance/segregation_of_duties.md for the four-eyes policy.
+# =============================================================================
+
+# Default owner — any unowned path falls through to engineering.
+*                                   @org/eng-blockchain
+
+# Smart contracts — require a Solidity reviewer AND security.
+contracts/                          @org/eng-blockchain @org/security
+migrations/                         @org/eng-blockchain @org/security
+
+# Key management and signers — require security AND ops.
+services/keymanagement/             @org/security @org/ops
+
+# Off-chain services that touch the audit trail.
+services/indexer/                   @org/eng-blockchain @org/ops
+services/reconciliation/            @org/eng-blockchain @org/ops
+
+# Stress harness — testnet only, lower bar.
+contracts/stress/                   @org/eng-blockchain
+services/stress/                    @org/eng-blockchain
+
+# Scripts that touch deployment.
+scripts/                            @org/eng-blockchain @org/security
+
+# CI / infra config.
+.github/                            @org/eng-platform @org/security
